@@ -1,0 +1,47 @@
+# --- Core ---
+torch>=2.2.0          # 2.2+ ships proper Python 3.11/3.12 wheels
+torchvision>=0.17.0
+numpy>=1.26.0          # first NumPy line with official 3.12 wheels
+
+# --- Universal architecture loading (primary path) ---
+# spandrel auto-detects arch + hyperparams straight from raw state_dicts and
+# covers 25+ SR/restoration architectures: ESRGAN/RRDBNet, SRVGGCompact,
+# SPAN, OmniSR, SAFMN, HAT, DAT, SwinIR, Swin2SR, SRFormer, RGT, DRCT, ATD,
+# RealCUGAN (UpCunet2x / 2x_fast / 3x / 4x), PLKSR / RealPLKSR,
+# RestoreFormer, RetinexFormer, SCUNet, and more.
+spandrel>=0.4.1
+# spandrel_extra_arches holds architectures under non-commercial / more
+# restrictive licenses, kept as a SEPARATE opt-in package on purpose -
+# see README licensing notes before enabling this beyond personal/
+# non-commercial use.
+spandrel_extra_arches>=0.2.0
+
+# --- Multi-format checkpoint I/O (.pth / .safetensors / .onnx / .ckpt) ---
+safetensors>=0.4.2
+onnx>=1.16.0
+onnxruntime-gpu>=1.18.0 ; sys_platform != "darwin"
+onnxruntime>=1.18.0 ; sys_platform == "darwin"
+
+# --- OpenModelDB convenience (browse/download/convert/verify only - this
+# is NOT used for architecture loading, spandrel handles that) ---
+openmodeldb>=1.2.0
+
+# --- Image I/O / misc (carried over from upstream Real-ESRGAN) ---
+opencv-python-headless>=4.9.0
+Pillow>=10.3.0
+tqdm>=4.66.0
+pyyaml>=6.0.1
+
+# --- Dev / packaging ---
+setuptools>=69.0
+wheel>=0.43
+
+# --- REMOVED from upstream ---
+# basicsr    -> replaced by spandrel for arch loading (see archs2/ for the
+#               hand-written fallback used only when spandrel doesn't
+#               recognize a checkpoint). basicsr itself has had installation
+#               problems on Python 3.11/3.12 (setup.py assumes older
+#               torchvision internals), so it is intentionally dropped.
+# facexlib   -> only needed for the face-enhance (GFPGAN) demo path, not
+#               core upscaling. Re-add manually if you use --face_enhance.
+# gfpgan     -> same as above.
