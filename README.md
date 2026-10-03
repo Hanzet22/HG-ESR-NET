@@ -1,3 +1,4 @@
+<meta name="google-site-verification" content="8aqOp2TrB2EV2dHv2o4NywAKiPa4-DwUBgMTEMyxzcU" />
 <p align="center">
   <img src="assets/realesrgan_logo.png" height=120>
 </p>
